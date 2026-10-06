@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Управление E-Commerce — Панель администратора</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="dashboard-layout">
+
+  <nav class="sidebar-nav" aria-label="Основное меню">
+    <figure class="brand-logo">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E" 
+           alt="Логотип системы управления E-Shop Admin" 
+           width="32" 
+           height="32">
+      <figcaption class="brand-title">E-Shop Admin</figcaption>
+    </figure>
+
+    <ul class="nav-menu">
+      <li><a href="#orders-section" class="nav-item active">Заказы</a></li>
+      <li><a href="#products-section" class="nav-item">Товары</a></li>
+      <li><a href="#returns-section" class="nav-item">Возвраты</a></li>
+    </ul>
+  </nav>
+
+  <header class="dashboard-header">
+    <hgroup>
+      <h1 class="header-heading">Панель управления торговлей</h1>
+      <p class="header-sub">
+        Отчетные данные на 
+        <time datetime="2026-10-05">05 октября 2026 года</time>
+      </p>
+    </hgroup>
+  </header>
+
+  <main class="dashboard-main">
+
+    <section id="orders-section" class="content-block">
+      <header class="block-header">
+        <h2 class="block-title">Реестр заказов клиентов</h2>
+      </header>
+
+      <table class="data-table">
+        <caption class="table-caption">Список подтвержденных и обрабатываемых заказов интернет-магазина</caption>
+        <thead>
+          <tr>
+            <th scope="col">Номер</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Покупатель</th>
+            <th scope="col">Состав заказа</th>
+            <th scope="col">Сумма</th>
+            <th scope="col">Статус</th>
+          </tr>
+        </thead>
+        <tbody id="orders-table-body">
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section id="products-section" class="content-block">
+      <header class="block-header">
+        <h2 class="block-title">Каталог и складские остатки</h2>
+      </header>
+      <ul id="products-list" class="cards-grid" aria-label="Список товаров на складе">
+       
+      </ul>
+    </section>
+
+  </main>
+
+  <aside id="returns-section" class="extra-panel" aria-label="Панель возвратов">
+    <header class="extra-header">
+      <h2 class="extra-title">Заявки на возврат</h2>
+    </header>
+    <ul id="returns-list" class="returns-stack" aria-label="Список претензий">
+    
+    </ul>
+  </aside>
+
+  
+  <footer class="dashboard-footer">
+    <address class="footer-info">
+      Служба поддержки: <a href="mailto:support@eshop.ru">support@eshop.ru</a> | Отдел логистики: +7 (495) 123-45-67
+    </address>
+    <p class="footer-copy">© <time datetime="2026">2026</time> E-Shop Control System.</p>
+  </footer>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+body, h1, h2, h3, p, figure, dl, dd, ul, ol {
+  margin: 0;
+}
+
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-family-base);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: var(--lh-normal);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* ==========================================================================
+   2. ДИЗАЙН-ТОКЕНЫ (CSS ПЕРЕМЕННЫЕ)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Типографика и шрифты */
+  --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-md: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.25rem;   /* 20px */
+  --font-size-2xl: 1.5rem;   /* 24px */
+
+  --lh-tight: 1.25;
+  --lh-normal: 1.5;
+  --ls-tight: -0.015em;
+  --ls-normal: 0;
+  --ls-wide: 0.03em;
+
+  /* Цвета фонов (3 уровня) */
+  --bg-primary: #f1f5f9;
+  --bg-surface: #ffffff;
+  --bg-secondary: #e2e8f0;
+
+  /* Цвета текста (3 уровня) */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  /* Цвета границ (2 уровня) */
+  --border-light: #e2e8f0;
+  --border-dark: #cbd5e1;
+
+  /* Акцентный цвет */
+  --color-accent: #2563eb;
+
+  /* Цвета состояний */
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-info: #0284c7;
+
+  /* 6 шагов отступов */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 16px;
+  --spacing-4: 24px;
+  --spacing-5: 32px;
+  --spacing-6: 48px;
+
+  /* 4 радиуса скругления */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* 3 уровня теней */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   3. СЕТКА ИНТЕРФЕЙСА (CSS GRID LAYOUT)
+   ========================================================================== */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 300px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "sidebar header extra"
+    "sidebar main   extra"
+    "sidebar footer extra";
+  min-height: 100vh;
+}
+
+/* Боковая панель */
+.sidebar-nav {
+  grid-area: sidebar;
+  background-color: var(--bg-surface);
+  border-right: 1px solid var(--border-light);
+  padding: var(--spacing-4) var(--spacing-3);
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-5);
+}
+
+.brand-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  letter-spacing: var(--ls-tight);
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.nav-item {
+  display: block;
+  padding: var(--spacing-2) var(--spacing-3);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+}
+
+.nav-item.active,
+.nav-item:hover {
+  background-color: var(--bg-primary);
+  color: var(--color-accent);
+}
+
+/* Шапка */
+.dashboard-header {
+  grid-area: header;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-light);
+  padding: var(--spacing-3) var(--spacing-4);
+}
+
+.header-heading {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  letter-spacing: var(--ls-tight);
+  line-height: var(--lh-tight);
+}
+
+.header-sub {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+/* Основная область */
+.dashboard-main {
+  grid-area: main;
+  padding: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.content-block {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.block-header {
+  margin-bottom: var(--spacing-3);
+  padding-bottom: var(--spacing-2);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.block-title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  letter-spacing: var(--ls-tight);
+}
+
+/* Таблица заказов */
+.table-caption {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  text-align: left;
+  margin-bottom: var(--spacing-2);
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--spacing-2) var(--spacing-3);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.data-table th {
+  background-color: var(--bg-primary);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Карточки товаров */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--spacing-3);
+}
+
+.product-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.product-card-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.product-card-desc {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.product-card-meta {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+.product-card-price {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-top: auto;
+}
+
+/* Дополнительная панель (Возвраты) */
+.extra-panel {
+  grid-area: extra;
+  background-color: var(--bg-surface);
+  border-left: 1px solid var(--border-light);
+  padding: var(--spacing-4) var(--spacing-3);
+  overflow-y: auto;
+}
+
+.extra-header {
+  margin-bottom: var(--spacing-3);
+}
+
+.extra-title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.returns-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.return-item {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3);
+}
+
+.return-item-title {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.return-item-desc {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin: var(--spacing-1) 0;
+}
+
+/* Бейджи статусов */
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  border-radius: var(--radius-full);
+}
+
+.status-badge--success { background-color: #dcfce7; color: var(--color-success); }
+.status-badge--warning { background-color: #fef3c7; color: var(--color-warning); }
+.status-badge--danger  { background-color: #fee2e2; color: var(--color-danger); }
+.status-badge--info    { background-color: #e0f2fe; color: var(--color-info); }
+
+/* Подвал */
+.dashboard-footer {
+  grid-area: footer;
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--border-light);
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.footer-info {
+  font-style: normal;
+  margin-bottom: var(--spacing-1);
+}
