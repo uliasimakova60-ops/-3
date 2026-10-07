@@ -4,89 +4,213 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Управление E-Commerce — Панель администратора</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="dashboard-layout">
+<body>
+  <div class="dashboard-layout">
+    <aside class="sidebar-nav">
+      <div class="brand-logo">
+        <span class="brand-mark" aria-hidden="true">ES</span>
+        <span class="brand-title">E-Shop Admin</span>
+      </div>
+      <nav aria-label="Разделы панели">
+        <ul class="nav-menu">
+          <li><a class="nav-item active" href="#orders">Заказы</a></li>
+          <li><a class="nav-item" href="#products">Товары</a></li>
+          <li><a class="nav-item" href="#returns">Возвраты</a></li>
+          <li><a class="nav-item" href="#analytics">Аналитика</a></li>
+        </ul>
+      </nav>
+    </aside>
 
-  <nav class="sidebar-nav" aria-label="Основное меню">
-    <figure class="brand-logo">
-      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E" 
-           alt="Логотип системы управления E-Shop Admin" 
-           width="32" 
-           height="32">
-      <figcaption class="brand-title">E-Shop Admin</figcaption>
-    </figure>
-
-    <ul class="nav-menu">
-      <li><a href="#orders-section" class="nav-item active">Заказы</a></li>
-      <li><a href="#products-section" class="nav-item">Товары</a></li>
-      <li><a href="#returns-section" class="nav-item">Возвраты</a></li>
-    </ul>
-  </nav>
-
-  <header class="dashboard-header">
-    <hgroup>
+    <header class="dashboard-header">
       <h1 class="header-heading">Панель управления торговлей</h1>
       <p class="header-sub">
-        Отчетные данные на 
+        Отчетные данные на
         <time datetime="2026-10-05">05 октября 2026 года</time>
       </p>
-    </hgroup>
-  </header>
-
-  <main class="dashboard-main">
-
-    <section id="orders-section" class="content-block">
-      <header class="block-header">
-        <h2 class="block-title">Реестр заказов клиентов</h2>
-      </header>
-
-      <table class="data-table">
-        <caption class="table-caption">Список подтвержденных и обрабатываемых заказов интернет-магазина</caption>
-        <thead>
-          <tr>
-            <th scope="col">Номер</th>
-            <th scope="col">Дата</th>
-            <th scope="col">Покупатель</th>
-            <th scope="col">Состав заказа</th>
-            <th scope="col">Сумма</th>
-            <th scope="col">Статус</th>
-          </tr>
-        </thead>
-        <tbody id="orders-table-body">
-          
-        </tbody>
-      </table>
-    </section>
-
-    <section id="products-section" class="content-block">
-      <header class="block-header">
-        <h2 class="block-title">Каталог и складские остатки</h2>
-      </header>
-      <ul id="products-list" class="cards-grid" aria-label="Список товаров на складе">
-       
-      </ul>
-    </section>
-
-  </main>
-
-  <aside id="returns-section" class="extra-panel" aria-label="Панель возвратов">
-    <header class="extra-header">
-      <h2 class="extra-title">Заявки на возврат</h2>
     </header>
-    <ul id="returns-list" class="returns-stack" aria-label="Список претензий">
-    
-    </ul>
-  </aside>
 
-  
-  <footer class="dashboard-footer">
-    <address class="footer-info">
-      Служба поддержки: <a href="mailto:support@eshop.ru">support@eshop.ru</a> | Отдел логистики: +7 (495) 123-45-67
-    </address>
-    <p class="footer-copy">© <time datetime="2026">2026</time> E-Shop Control System.</p>
-  </footer>
+    <main class="dashboard-main">
+      <section class="stats-row" id="analytics" aria-label="Сводка продаж">
+        <article class="stat-card">
+          <p class="stat-label">Заказов</p>
+          <p class="stat-value" id="stat-orders">—</p>
+          <p class="stat-note">в реестре</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Выручка</p>
+          <p class="stat-value" id="stat-revenue">—</p>
+          <p class="stat-note">без отменённых</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Товаров</p>
+          <p class="stat-value" id="stat-products">—</p>
+          <p class="stat-note">в каталоге</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Возвраты</p>
+          <p class="stat-value" id="stat-returns">—</p>
+          <p class="stat-note">открытых заявок</p>
+        </article>
+      </section>
 
-  <script src="./script.js" defer></script>
+      <section class="content-block" id="orders">
+        <div class="block-header">
+          <h2 class="block-title">Реестр заказов клиентов</h2>
+          <p class="block-note">Список подтвержденных и обрабатываемых заказов интернет-магазина</p>
+        </div>
+
+        <form class="filter-panel" id="order-filters">
+          <div class="filter-field filter-field--grow">
+            <label for="order-search">Поиск по заказу</label>
+            <input
+              type="search"
+              id="order-search"
+              name="search"
+              placeholder="Номер, покупатель или товар"
+              autocomplete="off"
+            >
+          </div>
+
+          <div class="filter-field">
+            <label for="order-status">Статус</label>
+            <select id="order-status" name="status">
+              <option value="">Все статусы</option>
+              <option value="Новый">Новый</option>
+              <option value="Обработка">Обработка</option>
+              <option value="В пути">В пути</option>
+              <option value="Доставлен">Доставлен</option>
+              <option value="Отменен">Отменен</option>
+            </select>
+          </div>
+
+          <fieldset class="filter-field">
+            <legend>Оплата</legend>
+            <div class="check-row">
+              <label class="check">
+                <input type="checkbox" name="pay" value="Карта" checked>
+                <span>Карта</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="pay" value="СБП" checked>
+                <span>СБП</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="pay" value="Наличные" checked>
+                <span>Наличные</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="filter-field">
+            <legend>Вид списка</legend>
+            <div class="radio-row">
+              <label class="radio">
+                <input type="radio" name="view" value="table" checked>
+                <span>Таблица</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="view" value="cards">
+                <span>Карточки</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="filter-actions">
+            <button type="reset" class="btn btn--ghost" id="order-reset">Сбросить</button>
+          </div>
+        </form>
+
+        <p class="result-count" id="order-count" aria-live="polite"></p>
+
+        <div class="table-wrap" id="orders-table-wrap">
+          <table class="data-table">
+            <caption class="table-caption">Заказы магазина: номер, дата, покупатель, состав, сумма и статус</caption>
+            <thead>
+              <tr>
+                <th scope="col" aria-sort="none">
+                  <button type="button" class="sort-btn" data-sort="orderNumber">
+                    Номер <span class="sort-arrow" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" aria-sort="none">
+                  <button type="button" class="sort-btn" data-sort="createdAt">
+                    Дата <span class="sort-arrow" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" aria-sort="none">
+                  <button type="button" class="sort-btn" data-sort="clientName">
+                    Покупатель <span class="sort-arrow" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col">Состав заказа</th>
+                <th scope="col" aria-sort="none">
+                  <button type="button" class="sort-btn" data-sort="total">
+                    Сумма <span class="sort-arrow" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" aria-sort="none">
+                  <button type="button" class="sort-btn" data-sort="status">
+                    Статус <span class="sort-arrow" aria-hidden="true"></span>
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="orders-table-body"></tbody>
+          </table>
+        </div>
+
+        <ul class="order-cards" id="orders-cards" hidden></ul>
+        <p class="empty-note" id="orders-empty" hidden>Ничего не найдено. Попробуйте сбросить фильтры.</p>
+      </section>
+
+      <section class="content-block" id="products">
+        <div class="block-header">
+          <h2 class="block-title">Каталог и складские остатки</h2>
+          <p class="block-note">Карточка товара: код, название, статус, описание и ответственный по складу</p>
+        </div>
+        <ul class="cards-grid" id="products-list"></ul>
+      </section>
+    </main>
+
+    <aside class="extra-panel" id="returns">
+      <div class="extra-header">
+        <h2 class="extra-title">Заявки на возврат</h2>
+        <p class="block-note">Нажмите на заявку, чтобы открыть карточку</p>
+      </div>
+      <ul class="returns-stack" id="returns-list"></ul>
+    </aside>
+
+    <footer class="dashboard-footer">
+      <address class="footer-info">
+        Служба поддержки: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="46353336362934320623352e2936682a2925272a">[email&#160;protected]</a> | Отдел логистики: +7 (228) 666-69-67
+      </address>
+      <p>© 2026 E-Shop Control System.</p>
+    </footer>
+  </div>
+
+  <div class="modal" id="detail-modal" hidden>
+    <div class="modal-backdrop" data-close="true"></div>
+    <div
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      tabindex="-1"
+    >
+      <header class="modal-header">
+        <h2 class="modal-title" id="modal-title">Карточка</h2>
+        <button type="button" class="icon-btn" id="modal-close" aria-label="Закрыть">×</button>
+      </header>
+      <div class="modal-body" id="modal-body"></div>
+      <footer class="modal-footer">
+        <button type="button" class="btn btn--ghost" data-close="true">Закрыть</button>
+        <button type="button" class="btn btn--primary" id="modal-action" disabled>В работу</button>
+      </footer>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
 </body>
 </html>
